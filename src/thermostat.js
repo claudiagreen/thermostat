@@ -1,12 +1,17 @@
 function Thermostat(){
   this.temperature = 20;
   this.maxTemp = 25;
-  this.tempColor = 'yellow'
+  this.powerSaving = true;
 }
 
 Thermostat.prototype.increaseTemp = function(){
-  this.temperature ++;
-  this.displayTempColor();
+  if(this.temperature < this.maxTemp){
+    this.temperature ++;
+    this.displayTempColor();
+  }
+  else{
+    throw new Error("Cannot exceed maximum temperature");
+  }
 };
 
 Thermostat.prototype.decreaseTemp = function(){
@@ -19,12 +24,14 @@ Thermostat.prototype.decreaseTemp = function(){
   }
 };
 
-Thermostat.prototype.powerSaving = function(){
+Thermostat.prototype.powerSavingSwitch = function(){
   if(this.maxTemp === 25){
     this.maxTemp = 32;
+    this.powerSaving = false;
   }
   else {
     this.maxTemp = 25;
+    this.powerSaving = true;
   }
 };
 
@@ -34,12 +41,12 @@ Thermostat.prototype.resetTemp = function(){
 
 Thermostat.prototype.displayTempColor = function(){
   if(this.temperature < 18){
-    this.tempColor = 'green';
+    return 'green';
   }
   else if (this.temperature >= 18 && this.temperature < 25) {
-    this.tempColor = 'yellow';
+    return 'yellow';
   }
   else {
-    this.tempColor = 'red';
+    return 'red';
   }
-}
+};

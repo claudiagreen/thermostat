@@ -8,13 +8,15 @@ describe("Thermostat", function(){
     expect(thermostat.temperature).toEqual(20);
   });
 
-  it("initial color is yellow", function(){
-    expect(thermostat.tempColor).toEqual('yellow');
-  });
-
   it("can increase temperature", function(){
     thermostat.increaseTemp();
     expect(thermostat.temperature).toEqual(21);
+  });
+
+  it("throws an error for beyond maxTemp", function(){
+    thermostat.temperature = 25;
+    var error = 'Cannot exceed maximum temperature';
+    expect( function() { thermostat.increaseTemp();}).toThrow(new Error(error));
   });
 
   it("can decrease temperature", function(){
@@ -23,8 +25,8 @@ describe("Thermostat", function(){
   });
 
   it("minimum temperature is 10 degrees", function(){
-    var error = "Temperature can't be below 10"
-    for(i=20; i>=11; i--){thermostat.decreaseTemp()};
+    var error = "Temperature can't be below 10";
+    for(i=20; i>=11; i--){thermostat.decreaseTemp();}
     expect( function(){ thermostat.decreaseTemp(); } ).toThrow(new Error(error));
   });
 
@@ -33,9 +35,18 @@ describe("Thermostat", function(){
       expect(thermostat.maxTemp).toEqual(25);
     });
 
+    it("maximum temperature is 25 when on", function(){
+      expect(thermostat.powerSaving).toBeTruthy();
+    });
+
     it("maximum temperature is 32 when off", function(){
-      thermostat.powerSaving();
+      thermostat.powerSavingSwitch();
       expect(thermostat.maxTemp).toEqual(32);
+    });
+
+    it("maximum temperature is 32 when off", function(){
+      thermostat.powerSavingSwitch();
+      expect(thermostat.powerSaving).toBeFalsy();
     });
   });
 
@@ -48,20 +59,17 @@ describe("Thermostat", function(){
   describe("display colour", function(){
     it("is green if temperature below 18", function(){
       thermostat.temperature = 17;
-      thermostat.displayTempColor();
-      expect(thermostat.tempColor).toEqual('green');
+      expect(thermostat.displayTempColor()).toEqual('green');
     });
 
     it("is yellow if temperature is >=18 but < 25", function(){
       thermostat.temperature = 18;
-      thermostat.displayTempColor();
-      expect(thermostat.tempColor).toEqual('yellow');
+      expect(thermostat.displayTempColor()).toEqual('yellow');
     });
 
     it("is red if temperature is >= 25", function(){
       thermostat.temperature = 25;
-      thermostat.displayTempColor();
-      expect(thermostat.tempColor).toEqual('red');
+      expect(thermostat.displayTempColor()).toEqual('red');
     });
-  })
+  });
 });
