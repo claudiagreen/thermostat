@@ -9,7 +9,7 @@ describe("Thermostat", function(){
   });
 
   it("initial color is yellow", function(){
-    expect(thermostat.displayColor).toEqual('yellow');
+    expect(thermostat.tempColor).toEqual('yellow');
   });
 
   it("can increase temperature", function(){
@@ -48,20 +48,20 @@ describe("Thermostat", function(){
   describe("display colour", function(){
     it("is green if temperature below 18", function(){
       thermostat.temperature = 17;
-      thermostat.setColor();
-      expect(thermostat.displayColor).toEqual('green');
+      thermostat.displayTempColor();
+      expect(thermostat.tempColor).toEqual('green');
     });
 
     it("is yellow if temperature is >=18 but < 25", function(){
       thermostat.temperature = 18;
-      thermostat.setColor();
-      expect(thermostat.displayColor).toEqual('yellow');
+      thermostat.displayTempColor();
+      expect(thermostat.tempColor).toEqual('yellow');
     });
 
     it("is red if temperature is >= 25", function(){
       thermostat.temperature = 25;
-      thermostat.setColor();
-      expect(thermostat.displayColor).toEqual('red');
+      thermostat.displayTempColor();
+      expect(thermostat.tempColor).toEqual('red');
     });
   })
 });

@@ -1,18 +1,18 @@
 function Thermostat(){
   this.temperature = 20;
   this.maxTemp = 25;
-  this.displayColor = 'yellow'
+  this.tempColor = 'yellow'
 }
 
 Thermostat.prototype.increaseTemp = function(){
   this.temperature ++;
-  this.setColor();
+  this.displayTempColor();
 };
 
 Thermostat.prototype.decreaseTemp = function(){
   if(this.temperature > 10){
     this.temperature --;
-    this.setColor();
+    this.displayTempColor();
   }
   else {
     throw new Error("Temperature can't be below 10");
@@ -32,14 +32,14 @@ Thermostat.prototype.resetTemp = function(){
   this.temperature = 20;
 };
 
-Thermostat.prototype.setColor = function(){
+Thermostat.prototype.displayTempColor = function(){
   if(this.temperature < 18){
-    this.displayColor = 'green';
+    this.tempColor = 'green';
   }
   else if (this.temperature >= 18 && this.temperature < 25) {
-    this.displayColor = 'yellow';
+    this.tempColor = 'yellow';
   }
   else {
-    this.displayColor = 'red';
+    this.tempColor = 'red';
   }
 }
