@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type='text/javascript' src='/src/thermostat.js' ></script>
     <title> Thermostat </title>
   </head>
   <body>
+    <script type='text/javascript' src='./src/thermostat.js' ></script>
+    <script src="./src/jquery.js"></script>
+    <script src="./src/controller.js"></script>
     <form>
-      <button id='increase_temp'> + </button>
-      <button id='decrease_temp'> - </button>
-      <button id='reset_tempt'> Reset </button>
-      <button id='power_saving'> Power saving </button>
+      <section>
+        <h1 id="temperature"></h1>
+        <p>
+          <button id='increase_temp'> + </button>
+          <button id='decrease_temp'> - </button>
+          <button id='reset_tempt'> Reset </button>
+          <button id='power_saving'> Power saving </button>
+        </p>
+      </section>
     </form>
   </body>
 </html>
